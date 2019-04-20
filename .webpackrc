@@ -1,5 +1,20 @@
 {
   "extraBabelPlugins": [
     ["import", { "libraryName": "antd-mobile", "style": true }]
-  ]
+  ],
+  "proxy": {
+      "/api": {
+          "target": "http://localhost:9093/",
+          "changeOrigin": true,
+          "pathRewrite": {"^/api": ""}
+      }
+  },
+  "env": {
+      "development": {
+          "publicPath":"/",
+          "extraBabelPlugins": [
+              "dva-hmr"
+          ]
+      }
+  }
 }

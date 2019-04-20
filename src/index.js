@@ -1,6 +1,6 @@
 import dva from 'dva';
-import './index.css';
-import './assets/css/reset.less';
+import '@/index.css';
+import '@/assets/css/reset.less';
 // user BrowserHistory
 import createHistory from 'history/createBrowserHistory';
 

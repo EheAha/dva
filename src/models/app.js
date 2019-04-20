@@ -15,16 +15,16 @@ export default {
       return history.listen(({ pathname }) => {
         switch (pathname) {
           case '/':
-            console.log('home page... do something here', history.location)
+            // console.log('home page... do something here', history.location)
             break;
           case '/result':
-            console.log('result page... do something here', history.location)
+            // console.log('result page... do something here', history.location)
             break;
           case '/book':
-            console.log('book page... do something here', history.location)
+            // console.log('book page... do something here', history.location)
             break;
           case '/complete':
-            console.log('complete page... do something here', history.location)
+            // console.log('complete page... do something here', history.location)
             break;
           default:
             break;

@@ -1,45 +1,46 @@
 import React from 'react';
-import { Router, Route, Switch } from 'dva/router';
-import Loadable from 'react-loadable'; 
+import { Router, Route } from 'dva/router';
+import Loadable from 'react-loadable'; //用于骨架屏
 import dynamic from 'dva/dynamic'; // 异步加载路由
 
 const AsyncIndex = Loadable({
   timeout: 3000,
-  loading () {
+  loading() {
     return <div>loading....</div>
   },
   loader: () => import('./routes/homePage')
 })
 
 function RouterConfig({ history, app }) {
+  const sharedCote = dynamic({
+    app,
+    component: () => import('routes/sharedCote')
+  })
   // 首页
   const homePage = dynamic({
     app,
-    component: () => import('./routes/homePage')
+    component: () => import('routes/homePage')
   })
-  // 结果页
-  const resultPage = dynamic({
+  // 影院
+  const moviePage = dynamic({
     app,
-    component: () => import('./routes/resultPage')
+    component: () => import('routes/moviePage')
   })
-  // 下单页
-  const bookPage = dynamic({
+  // 我的
+  const personPage = dynamic({
     app,
-    component: () => import('./routes/bookPage')
+    component: () => import('routes/personPage')
   })
-  // 完成页
-  const completePage = dynamic({
-    app,
-    component: () => import('./routes/completePage')
-  })
+
   return (
     <Router history={history}>
-      <Switch>
+      <div>
+        <Route component={sharedCote} />
         <Route path="/" exact component={homePage}/>
-        <Route path="/result" exact component={resultPage}/>
-        <Route path="/book" exact component={bookPage}/>
-        <Route path="/complete" exact component={completePage}/>
-      </Switch>
+        <Route path="/homePage" component={homePage}/>
+        <Route path="/movie" exact component={moviePage} />
+        <Route path="/person" exact component={personPage} />
+      </div>
     </Router>
   );
 }
