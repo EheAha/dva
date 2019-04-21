@@ -2,10 +2,8 @@ import React,{Component} from "react"
 import styles from 'css/home.less'
 import { Tabs } from 'antd-mobile';
 
-import hotPage from 'routes/hotPage'
-import willPage from 'routes/willPage'
-import HotPage from "./hotPage";
-import WillPage from "./willPage";
+import HotPage from 'routes/hotPage'
+import WillPage from 'routes/willPage'
 import TabsControl from 'components/tabsControl/tabsControl'
 
 const tabs = [
@@ -29,10 +27,10 @@ class HomePage extends Component {
         <div className={styles.navBar_wrap}>
           <TabsControl>
             <div name='正在热映'>
-                 hot
+                 <HotPage></HotPage>
             </div>
             <div name='即将上映'>
-                 willPage
+                 <WillPage></WillPage>
             </div>
           </TabsControl>
         </div>
