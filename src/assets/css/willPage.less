@@ -1,0 +1,199 @@
+.willList_wrap{
+    width:50%;
+    height: 5.3rem;
+    overflow: auto;
+    margin-bottom: 10px;
+}
+.most_expected{
+    height: 2.14rem;
+    padding:0.12rem 0.15rem;
+    background: #fff;
+    margin-bottom: 10px;
+    >.title{
+        width:100%;
+        line-height: .19rem;
+        margin: 0 0 12px;
+        font-size: 14px;
+        color: #333;
+    }
+    .most_expected_list{
+        overflow: scroll;
+        white-space: nowrap;
+        height: 1.61rem;
+        line-height: 0;
+        .expected_item{
+            display: inline-block;
+            width: 0.85rem;
+            overflow: hidden;
+            margin-right: 10px;
+            .poster{
+                width: 0.85rem;
+                height: 1.15rem;
+                position: relative;
+                margin-bottom: 6px;
+                >img{
+                    width:100%;
+                    height: 100%;
+                }
+                .wish_bg{
+                    position: absolute;
+                    left: 4px;
+                    bottom: 10px;
+                    color: #faaf00;
+                    font-size: 13px;
+                    font-weight: 600;
+                    >span:nth-child(2){
+                        margin-left:2px;
+                    }
+                }
+            }
+            .name{
+                margin: 0 0 3px;
+                font-size: 13px;
+                color: #222;
+                line-height: .17rem;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+            .data{
+                margin: 0;
+                font-size: 12px;
+                color: #999;
+                line-height: .16rem;
+            }
+        }
+    }
+}
+.coming_list{
+    background-color: #fff;
+    padding:.12rem .15rem;
+    >div{
+        width: 100%;
+        height: 1.45rem;
+        .group_date{
+            padding: .12rem .15rem 0;
+            margin: 0;
+            font-size: 14px;
+            color: #333;
+            line-height: .19rem;
+        }
+        .item{
+            padding-left: 15px;
+            background-color: #fff; 
+            height: 1.14rem;
+            width: 100%;
+            .main_block{
+                position: relative;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                .avatar{
+                    width: .64rem;
+                    height: .9rem;
+                    position: relative;
+                    margin-top: 12px;
+                    .default_img_bg{
+                        background-color: #e1e1e1;
+                        background-size: 100% 100%;
+                        line-height: 0;
+                        >img{
+                            background-color: transparent;
+                            height: .9rem;
+                        }
+                    }
+                }
+                .content_wrapper{
+                    padding: 12px 14px 12px 0;
+                    margin-left: .14rem;
+                    height: .9rem;
+                    max-height: .9rem;
+                    position: relative;
+                    .content{
+                        padding-right: 5px;
+                        margin-right: .48rem;
+                        overflow: hidden;
+                        .movie_title{
+                            max-height: .24rem;
+                            margin-bottom: 7px;
+                            line-height: .24rem;
+                            overflow: hidden;
+                            .title{
+                                font-size: 17px;
+                                color: #333;
+                                font-weight: 700;
+                                padding-right: 5px;
+                                flex-shrink: 1;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                                white-space: nowrap;
+                            }
+                        }
+                        .detail{
+                            box-sizing: border-box;
+                            line-height: 1;
+                            overflow: hidden;
+                        }
+                        .line_ellipsis{
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            .person{
+                                color: #faaf00;
+                                font-size: 15px;
+                                font-weight: 600;
+                            }
+                            .p_suffix{
+                                font-size: 13px;
+                                margin-left: -2px;
+                                display: inline-block;
+                                color: #666;
+                            }
+                        }
+                        .actor{
+                            width:2.02rem;
+                            font-size: 13px;
+                            color: #666;
+                            margin-top: 6px;
+                            line-height: 15px;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap;
+                        }
+                    }
+                    .button_block{
+                        font-size: 12px;
+                        position: absolute;
+                        right: 14px;
+                        top: 0;
+                        bottom: 0;
+                        height: 27px;
+                        margin: auto;
+                        .btn{
+                            width: 47px;
+                            height: 27px;
+                            line-height: 28px;
+                            text-align: center;
+                            box-sizing: border-box;
+                            background-color: #f03d37;
+                            color: #fff;
+                            border-radius: 4px;
+                            white-space: nowrap;
+                            font-size: 12px;
+                            cursor: pointer;
+                            background-color: #3c9fe6;
+                        }
+                    }
+                    .content:before{
+                        display: block;
+                        position: absolute;
+                        width: .46rem;
+                        height: .46rem;
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                    }
+                }
+            }
+        }
+    }
+}
