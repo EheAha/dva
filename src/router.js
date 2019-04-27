@@ -46,6 +46,11 @@ function RouterConfig({ history, app }) {
     app,
     component: () => import('routes/registe')
   })
+  //城市选择
+  const City = dynamic({
+    app,
+    component: () => import('routes/city')
+  })
 
   return (
     <Router history={history}>
@@ -58,6 +63,7 @@ function RouterConfig({ history, app }) {
         <Route path='/search' exact component={Search}/>
         <Route path='/loginIn' exact component={loginIn}/>
         <Route path='/registe' exact component={registe}/>
+        <Route path='/selectCity' exact component={City}></Route>
       </div>
     </Router>
   );
