@@ -18,7 +18,7 @@ class HotPage extends Component{
                     </div>
                     <ul>
                         <li className={styles.ellipsis}>
-                            <div className={styles.title}>调音师</div>
+                            <div className={styles.title}>tiaoyinshi</div>
                         </li>
                         <li>
                             <span className={styles.guanzhongPing}>观众评</span>
