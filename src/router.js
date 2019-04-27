@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Switch } from 'dva/router';
+import { Router, Route } from 'dva/router';
 // import Loadable from 'react-loadable'; //用于骨架屏
 import dynamic from 'dva/dynamic'; // 异步加载路由
 
@@ -36,6 +36,16 @@ function RouterConfig({ history, app }) {
     app,
     component: () => import('routes/search')
   })
+  //登陆
+  const loginIn = dynamic({
+    app,
+    component: () => import('routes/loginIn')
+  })
+  //注册
+  const registe = dynamic({
+    app,
+    component: () => import('routes/registe')
+  })
 
   return (
     <Router history={history}>
@@ -45,9 +55,9 @@ function RouterConfig({ history, app }) {
         <Route path="/homePage" component={homePage}/>
         <Route path="/movie" exact component={moviePage} />
         <Route path="/person" exact component={personPage} />
-        <Switch>
-           <Route path='/search' exact component={Search}/>
-        </Switch>
+        <Route path='/search' exact component={Search}/>
+        <Route path='/loginIn' exact component={loginIn}/>
+        <Route path='/registe' exact component={registe}/>
       </div>
     </Router>
   );

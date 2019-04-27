@@ -1,5 +1,6 @@
 import React,{Component} from "react"
 import { withRouter } from 'dva/router'
+import ShareHead from 'components/shareHead/shareHead'
 import styles from 'css/home.less'
 
 import HotPage from 'routes/hotPage'
@@ -7,27 +8,11 @@ import WillPage from 'routes/willPage'
 import TabsControl from 'components/tabsControl/tabsControl'
 
 class HomePage extends Component {
-
-  jumpSearch(){
-    this.props.history.push('/search');
-  }
-
   render(){
     return(
       <div>
         {/* 头部 */}
-        <ul className={styles.headerHome}>
-          <li>
-            <span>安阳</span>
-            <span className="iconfont icon--xialajiantou"></span>
-          </li>
-          <li>
-            淘票
-          </li>
-          <li onClick={this.jumpSearch.bind(this)}>
-            <span className="iconfont icon-sousuo"></span>
-          </li>
-        </ul>
+        <ShareHead></ShareHead>
         {/* navBar */}
         <div className={styles.navBar_wrap}>
           <TabsControl>
