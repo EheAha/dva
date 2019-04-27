@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styles from './style.less'
 
+//首页面切换
 class TabsControl extends Component {
 
     constructor() {
@@ -19,7 +20,6 @@ class TabsControl extends Component {
     }
 
     render() {
-        let _this = this;
         return (
             <div className={styles.barsContain_wrap}>
                 {/*动态生成Tab导航*/}

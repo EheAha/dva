@@ -1,28 +1,33 @@
 import React,{Component} from "react"
+import { withRouter } from 'dva/router'
 import styles from 'css/home.less'
-import { Tabs } from 'antd-mobile';
 
 import HotPage from 'routes/hotPage'
 import WillPage from 'routes/willPage'
 import TabsControl from 'components/tabsControl/tabsControl'
 
-const tabs = [
-  { title: "正在热映" },
-  { title: "即将上映" }
-];
-
 class HomePage extends Component {
-  // constructor(props){
-  //   super(props);
-  //   this.state={
 
-  //   };
-  // }
+  jumpSearch(){
+    this.props.history.push('/search');
+  }
+
   render(){
     return(
       <div>
         {/* 头部 */}
-        <div className={styles.headerHome}>喵喵电影</div>
+        <ul className={styles.headerHome}>
+          <li>
+            <span>安阳</span>
+            <span className="iconfont icon--xialajiantou"></span>
+          </li>
+          <li>
+            淘票
+          </li>
+          <li onClick={this.jumpSearch.bind(this)}>
+            <span className="iconfont icon-sousuo"></span>
+          </li>
+        </ul>
         {/* navBar */}
         <div className={styles.navBar_wrap}>
           <TabsControl>
@@ -39,7 +44,7 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage
+export default withRouter(HomePage)
 
 /* import React from 'react'
 import { connect } from 'dva'

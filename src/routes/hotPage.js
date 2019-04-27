@@ -14,11 +14,11 @@ class HotPage extends Component{
             <div className={styles.hotList_wrap}>
                 <div className={styles.hotList}>
                     <div>
-                        <img src={img1}/>
+                        <img src={img1} alt=''/>
                     </div>
                     <ul>
                         <li className={styles.ellipsis}>
-                            <div className={styles.title}>tiaoyinshi</div>
+                            <div className={styles.title}>调音师</div>
                         </li>
                         <li>
                             <span className={styles.guanzhongPing}>观众评</span>
