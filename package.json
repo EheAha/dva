@@ -9,10 +9,13 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.55",
     "antd-mobile": "^2.2.2",
+    "classnames": "^2.2.6",
     "dva": "^2.3.1",
+    "lodash": "^4.17.11",
     "polished": "^1.9.3",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "babel-plugin-dva-hmr": "^0.3.2",

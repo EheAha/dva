@@ -1,18 +1,32 @@
 import React,{Component} from 'react'
+import { withRouter } from 'dva/router'
 import styles from 'css/hotPage.less'
 import img1 from 'images/01.jpg'
 import axios from 'axios'
 
 class HotPage extends Component{
+    constructor(){
+        super();
+        this.state={
+
+        }
+        this.hotDetailJump = this.hotDetailJump.bind(this);
+    }
+
     componentDidMount(){
         axios.get('/api/hot').then((res)=>{
             console.log(res)
         })
     }
+
+    hotDetailJump(){
+        this.props.history.push('/detail');
+    }
+
     render(){
         return(
             <div className={styles.hotList_wrap}>
-                <div className={styles.hotList}>
+                <div className={styles.hotList} onClick={this.hotDetailJump}>
                     <div>
                         <img src={img1} alt=''/>
                     </div>
@@ -39,4 +53,4 @@ class HotPage extends Component{
     }
 }
 
-export default HotPage
+export default withRouter(HotPage)

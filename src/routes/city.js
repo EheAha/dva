@@ -12,6 +12,7 @@ class City extends Component {
            allCities:{}
         }
         this.pickIt = this.pickIt.bind(this);
+        this.cityBack = this.cityBack.bind(this);
     }
 
     componentDidMount() {
@@ -31,58 +32,61 @@ class City extends Component {
         }
     }
 
-    pickIt(){
+    pickIt(name){
+        console.log(name);
+    }
 
+    cityBack(){
+        this.props.history.goBack();
     }
 
     render() {
         const { allCities, hotCity } = this.state;
         return (
             <div className='cityPinkerWrap'>
-                <div>
-                    <div className='cityPinkerHead'>
-                        <span>
-                            <img src={row} alt=''/>    
-                        </span>  
-                        <span>城市选择</span>
-                    </div>
-                    <section>
-                        <div ref="hot" className="city-title">
-                            热门城市
-                        </div>
-                        <div className="city-list">
+                <div className='cityPinkerHead'>
+                    <span onClick={this.cityBack}>
+                        <img src={row} alt=''/>    
+                    </span>  
+                    <span>城市选择</span>
+                </div>
+                <div style={{'height':'630px','overflow':'scroll'}}>
+                    <div>
+                        <section>
+                            <div ref="hot" className="city-title">
+                                热门城市
+                            </div>
+                            <div className="city-list">
+                                {
+                                    hotCity.length!==0?hotCity.map((item,index)=>{
+                                        return (
+                                            <div className="city-item" onClick={()=>{this.pickIt(item.name)}} key={item.id}>{item.name}</div>
+                                        )
+                                    }) : ''
+                                }
+                            </div>
+                        </section>
+                        <section>
                             {
-                                hotCity.length!==0?hotCity.map((item,index)=>{
+                                Object.getOwnPropertyNames(allCities).length!==0?Object.keys(allCities).map((item,index)=>{
                                     return (
-                                        <div className="city-item" onClick={this.pickIt} key={item.id}>{item.name}</div>
-                                     )
-                                }) : ''
-                            }
-                        </div>
-                    </section>
-                    <section>
-                        {
-                            Object.getOwnPropertyNames(allCities).length!==0?Object.keys(allCities).map((item,index)=>{
-                                return (
-                                    <div key={index}>
-                                        <div className="city-title city-title-letter">{item}</div>
-                                        <div className="city-list city-list-block clearfix">
-                                            {
-                                                Object.values(allCities).map((itemValues)=>{
-                                                    itemValues.map((e,i)=>{
-                                                        console.log(e,i)
-                                                        return(
-                                                            <div className="city-item-hang" onClick={this.pickIt} key={i}>{e.name}</div>
-                                                        )         
+                                        <div key={index}>
+                                            <div className="city-title city-title-letter">{item}</div>
+                                            <div className="city-list city-list-block clearfix">
+                                                {
+                                                    allCities[item].map((itemValues,i)=>{
+                                                            return(
+                                                                <div className="city-item-hang" onClick={()=>{this.pickIt(itemValues.name)}} key={i}>{itemValues.name}</div>
+                                                            )         
                                                     })
-                                                })
-                                            }
-                                        </div >
-                                    </div>
-                                )
-                            }):''
-                        }
-                </section >
+                                                }
+                                            </div >
+                                        </div>
+                                    )
+                                }):''
+                            }
+                        </section >
+                    </div>
                 </div>
             </div>
         )

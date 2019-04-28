@@ -51,6 +51,16 @@ function RouterConfig({ history, app }) {
     app,
     component: () => import('routes/city')
   })
+  //详情
+  const detail = dynamic({
+    app,
+    component: () => import('routes/details')
+  })
+  //购票
+  const ChooseSeat = dynamic({
+    app,
+    component: () => import('routes/ChooseSeat')
+  })
 
   return (
     <Router history={history}>
@@ -64,6 +74,8 @@ function RouterConfig({ history, app }) {
         <Route path='/loginIn' exact component={loginIn}/>
         <Route path='/registe' exact component={registe}/>
         <Route path='/selectCity' exact component={City}></Route>
+        <Route path='/detail' exact component={detail}/>
+        <Route path='/chooseSeat' exact component={ChooseSeat}/>
       </div>
     </Router>
   );
