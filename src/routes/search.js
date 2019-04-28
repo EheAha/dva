@@ -43,7 +43,7 @@ class Search extends Component {
         return (
             <div>
                 <div className='search_header'>
-                    <TopHead address='/homePage'></TopHead>
+                    <TopHead address='/homePage' headInfo='淘票'></TopHead>
                     <div>
                         <SearchBar
                             placeholder="Search"

@@ -21,7 +21,7 @@ class Detail extends Component{
     render(){
         return(
             <div className='detail_wrap'>
-                <TopHead address='/homePage'></TopHead>
+                <TopHead address='/homePage' headInfo='详情页'></TopHead>
                 <div className='detail'>
                     <div>
                         <img src={img1} alt='' />

@@ -2,6 +2,12 @@
   "extraBabelPlugins": [
     ["import", { "libraryName": "antd-mobile", "style": true }]
   ],
+  "proxy": {
+    "/ajax": {
+      "target": "http://m.maoyan.com",
+      "changeOrigin": true
+    }
+  },
   "env": {
       "development": {
           "publicPath":"/",

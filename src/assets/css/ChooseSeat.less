@@ -10,18 +10,17 @@
         margin: 4% 2% 0;
         width: 96%;
         border: 1px solid #c9c9c9;
-        // display: flex;
-        // flex-direction: row;
-        // flex-wrap: nowrap;
     }
     .container>div:first-child{
         width: 100%;
         padding-top:4px;
     }
-    // .container>div:last-child{
-    //     width: 30%;
-    //     background-color: #F9F9F9;
-    // }
+    .container>div:last-child{
+        width: 98%;
+        background-color: #F9F9F9;
+        height: 3.4rem;
+        overflow: scroll;
+    }
     .seat-header{
         width: 90%;
         margin: 0 5%;
@@ -54,7 +53,7 @@
         color: #666;
     }
     .seats{
-        height: 500px;
+        height:224px;
         text-align: center;
         position: relative;
         overflow-x: scroll;
@@ -68,7 +67,8 @@
         z-index: -1;
     }
     .row{
-        height: 34px;
+        line-height: 28px;
+        padding-top: 10px;
     }
     .seat{
         display: inline-block;
@@ -91,14 +91,14 @@
     .seat-number{
         position: absolute;
         top: 0;
-        left: 10px;
+        left: -5px;
     }
     .seat-number span{
         display: block;
         font-size: 16px;
         color: #999;
         width: 20px;
-        height:26px;
+        line-height: 31px;
         padding: 4px;
     }
     /*.info-header{*/
@@ -114,13 +114,13 @@
     }
     .header-msg{
         display: inline-block;
-        width: 50%;
+        width: 96%;
         vertical-align: top;
-        margin: 12px;
+        margin: 12px 12px 0;
     }
     .header-msg p{
-        font-size: 12px;
-        line-height: 12px;
+        font-size: 14px;
+        line-height: 14px;
         -webkit-margin-before: 0.8em;
         -webkit-margin-after: 0.8em;
     }
@@ -131,7 +131,6 @@
     .info-main{
         font-size: 14px;
         border-bottom: 1px dashed #999;
-        margin: 0 14px;
     }
     .info-main p{
         font-size: 14px;
@@ -157,7 +156,7 @@
         background: url('../images/seat.png') no-repeat;
     }
     .select-item{
-        margin: 14px;
+        margin: 14px 0;
     }
     .select-label{
         font-size: 14px;

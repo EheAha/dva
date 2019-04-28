@@ -36,7 +36,7 @@ class registe extends Component{
     render(){
         return(
             <div className='registe'>
-                <TopHead address='/person'></TopHead>
+                <TopHead address='/person' headInfo='淘票'></TopHead>
                 <ul>
                     <li>
                         <List>

@@ -20,7 +20,7 @@ class TopHead extends Component{
         return(
             <div className='head_wrap'>
                 <span className="iconfont icon-sdf" onClick={this.rowJump}></span>
-                <p className='title'>淘票</p>
+                <p className='title'>{this.props.headInfo}</p>
             </div>
         )
     }

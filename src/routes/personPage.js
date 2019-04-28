@@ -33,16 +33,20 @@ class PersonPage extends Component{
             });
     }
 
+    myOrder(){
+        this.props.history.push('/order');
+    }
+
     render(){
         return(
             <div>
-                <TopHead address='/homePage'></TopHead>
+                <TopHead address='/homePage' headInfo='淘票'></TopHead>
                 <div className='clickLogin'>
                     <div onClick={this.clickLogin}>登陆</div>
                     <p>找到更适合你的电影哟~</p>
                 </div>
                 <ul className='personList'>
-                    <li>
+                    <li onClick={this.myOrder.bind(this)}>
                         <span className='iconfont icon-wodedingdan'></span>
                         <span>我的订单</span>
                     </li>  

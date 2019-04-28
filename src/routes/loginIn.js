@@ -36,7 +36,7 @@ class loginIn extends Component{
     render(){
         return(
             <div className='loginIn'>
-                <TopHead address='/person'></TopHead>
+                <TopHead address='/person' headInfo='淘票'></TopHead>
                 <ul>
                     <li>
                         <List>
