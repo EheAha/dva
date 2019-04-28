@@ -97,7 +97,7 @@ class MoviePage extends Component {
                   <div className="item-title">特色功能</div>
                   <div className="item-list">
                     {
-                      Object.getOwnPropertyNames(selectCondition).length !== 0 && selectCondition.service.subItems.map((item, index) => {
+                      Object.getOwnPropertyNames(selectCondition).length !== 0 && selectCondition.service.subItems.map((item) => {
                         return (
                           <div 
                           className="item chosen"
@@ -113,7 +113,7 @@ class MoviePage extends Component {
                   <div className="item-title">特殊厅</div>
                   <div className="item-list">
                     {
-                      Object.getOwnPropertyNames(selectCondition).length !== 0 && selectCondition.hallType.subItems.map((item, index) => {
+                      Object.getOwnPropertyNames(selectCondition).length !== 0 && selectCondition.hallType.subItems.map((item) => {
                         return (
                           <div 
                           className="item chosen" 
@@ -136,7 +136,7 @@ class MoviePage extends Component {
               <div className="page brand" style={{ "display": selectText === '.brand' ? 'block' : 'none' }}>
                 <div id="brand-content" style={{ 'height': '345px' }}>
                   {
-                    Object.getOwnPropertyNames(selectCondition).length !== 0 && selectCondition.brand.subItems.map((item, index) => {
+                    Object.getOwnPropertyNames(selectCondition).length !== 0 && selectCondition.brand.subItems.map((item) => {
                       return (
                         <div 
                         className="item brand-list chosen" 
@@ -156,7 +156,7 @@ class MoviePage extends Component {
               <div className="page brand" style={{ "display": selectText === '.region' ? 'block' : 'none' }}>
                 <div id="brand-content" style={{ 'height': ' 402.5px' }}>
                     {
-                       Object.getOwnPropertyNames(selectCondition).length !== 0 && selectCondition.district.subItems.map((item,index)=>{
+                       Object.getOwnPropertyNames(selectCondition).length !== 0 && selectCondition.district.subItems.map((item)=>{
                          return(
                            <div 
                            className="brand-list item chosen" 

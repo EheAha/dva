@@ -39,4 +39,93 @@
             }
         }
     }
+    .list{
+        border-bottom: 1px solid #e6e6e6;
+        padding-left: 15px;
+        border-top: 1px solid #e6e6e6;
+        .cinema {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+            padding: 15px 15px 15px 0;
+            .info {
+                -webkit-box-flex: 1;
+                flex: 1;
+                overflow: hidden;
+                .name-price {
+                    font-size: 16px;
+                    color: #000;
+                    margin-bottom: 6px;
+                    display: -webkit-box;
+                    display: flex;
+                    .sell-price {
+                        font-size: 11px;
+                        color: #999;
+                        white-space: nowrap;
+                        margin-left: 10px;
+                        .price {
+                            font-size: 17px;
+                            color: #ef4238;
+                        }
+                    }
+                }
+                .address {
+                    font-size: 13px;
+                    color: #999;
+                }
+                .feature-tags {
+                    margin-top: 7px;
+                    span {
+                        border: 1px solid #589daf;
+                        color: #589daf;
+                        position: relative;
+                        display: inline-block;
+                        padding: 0 3px;
+                        height: 15px;
+                        line-height: 15px;
+                        border-radius: 2px;
+                        font-size: .14rem;
+                    }
+                    .featrue {
+                        color: #f90;
+                        border-color: #f90;
+                    }
+                }
+            }
+            .distance {
+                font-size: 13px;
+                color: #999;
+            }
+            .one-line {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
+    }
+    .no-result {
+        height: 100vh;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        margin:44% 0 0 34%;
+        img {
+            width: 87px;
+            height: 100px;
+            margin-bottom: 16px;
+        }
+        p {
+            font-size: 16px;
+            color: #999;
+        }
+    }
 }
