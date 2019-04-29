@@ -13,7 +13,7 @@ class Search extends Component {
             isShowTag: 'block',
             isShowSearchList: 0,
             searchList: [],
-            searchRecord: localStorage.getItem('searchRecord')
+            searchRecord: JSON.parse(localStorage.getItem('searchRecord'))
         }
         this.submitText = this.submitText.bind(this);
     }
@@ -21,26 +21,17 @@ class Search extends Component {
     componentDidMount() {
         // this.autoFocusInst.focus();
         console.log(this.state.searchRecord)
+        if(localStorage.getItem('searchRecord')===null){
+            this.searchRecord={};
+        }else{
+            this.searchRecord=this.state.searchRecord
+        }
     }
-    // onChange= (value) => {
-    //     this.setState({ value });
-    // };
-    // clear = () => {
-    //     this.setState({ value: '' });
-    // };
-    // handleClick = () => {
-    //     this.manualFocusInst.focus();
-    // }
 
     //点击enter键进行搜索
     async submitText(value) {
         const searchList = await axios.get('/ajax/search?kw=' + value + '&cityId=10&stype=2').then((res) => { return res.data })
-        this.searchRecord = this.state.searchRecord;
-        console.log(this.state.searchRecord)
-        if(this.searchRecord===null){
-            this.searchRecord=[];
-        }
-        this.searchRecord.push(value);
+        this.searchRecord[value]=0;
         if (searchList !== undefined) {
             this.setState({
                 isShowTag: 'none',
@@ -54,17 +45,13 @@ class Search extends Component {
                 searchRecord: this.searchRecord,
                 isShowSearchList: 2
             }, () => {
-                localStorage.setItem('searchRecord', this.state.searchRecord)
+                localStorage.setItem('searchRecord', JSON.stringify(this.state.searchRecord))
             })
-        }
-
-        if (searchList.cinemas !== undefined) {
-
         }
     }
 
     render() {
-        const { isShowTag, isShowSearchList, searchList } = this.state;
+        const { isShowTag, isShowSearchList, searchList,searchRecord } = this.state;
         return (
             <div>
                 <div className='search_header'>
@@ -73,7 +60,6 @@ class Search extends Component {
                         <SearchBar
                             placeholder="搜影城"
                             maxLength={20}
-                            // value={this.state.value}
                             onSubmit={this.submitText}
                             onClear={value => console.log(value, 'onClear')}
                             onFocus={() => console.log('onFocus')}
@@ -87,11 +73,13 @@ class Search extends Component {
                 <div className='search_record' style={{ "display": isShowTag }}>
                     <p className='title'>搜索记录</p>
                     <div className='record_tag'>
-                        <Tag selected>Selected</Tag>
-                        <Tag selected>Selected</Tag>
-                        <Tag selected>Selected</Tag>
-                        <Tag selected>Selected</Tag>
-                        <Tag selected>Selected</Tag>
+                    {
+                        searchRecord!==null&&Object.keys(searchRecord).map((item,index)=>{
+                            return(
+                                <span key={index} onClick={this.submitText.bind(this,item)}>{item}</span>
+                            )
+                        })
+                    }
                     </div>
                 </div>
                 <div style={{ "display": isShowSearchList===2?"block":"none", "height": "5.67rem", "overflow": "scroll" }}>

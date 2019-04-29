@@ -31,7 +31,6 @@ class MoviePage extends Component {
                       break;
       default:
     }
-    console.log(dataType,this.requestIdName)
     const chooseCinameList = await axios.get('/ajax/cinemaList?'+this.requestIdName+'='+id).then(res=>{return res.data});
     this.setState({
       cinameList: chooseCinameList,
@@ -49,8 +48,6 @@ class MoviePage extends Component {
     if (selectCondition !== undefined) {
       this.setState({
         selectCondition: selectCondition
-      }, () => {
-        console.log(this.state.selectCondition)
       })
     }
   }
@@ -59,8 +56,6 @@ class MoviePage extends Component {
     const cinameList = await axios.get('/ajax/cinemaList').then((res) => { return res.data })
     this.setState({
       cinameList: cinameList
-    }, () => {
-      console.log(this.state.cinameList)
     })
   }
 
