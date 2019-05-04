@@ -1,39 +1,43 @@
 import React,{Component} from 'react'
 import TopHead from 'components/head/header'
-import { Button, List, InputItem, Toast  } from 'antd-mobile';
+import { Button, List, InputItem, Toast  } from 'antd-mobile'
+import request from 'utils/request.js'
+import { createForm } from 'rc-form'
 import 'css/loginIn.less'
 
 class loginIn extends Component{
     constructor(){
         super();
         this.state={
-            hasError: false,
-            value: '',  
+
         }
+        this.submitSignInInfo = this.submitSignInInfo.bind(this);
     }
 
-    onErrorClick = () => {
-        if (this.state.hasError) {
-          Toast.info('Please enter 11 digits');
-        }
-    }
-
-    onChange = (value) => {
-        if (value.replace(/\s/g, '').length < 11) {
-            this.setState({
-            hasError: true,
+    submitSignInInfo(){
+        this.props.form.validateFields(async (error, value) => {
+            if(error){
+                Toast.info('请将信息填写完整');
+                return;
+            }
+            const result = await request('/api/users/signin',{ 
+                method: 'POST',
+                headers:{
+                   'Content-Type':'application/json'
+                },
+                body: JSON.stringify(value)
             });
-        } else {
-            this.setState({
-            hasError: false,
-            });
-        }
-        this.setState({
-            value,
+            if(!result.data.ret){
+                Toast.info(result.data.data.msg);
+            }else{
+                this.props.history.push('/homePage');
+            }
         });
     }
+   
 
     render(){
+        const { getFieldProps } = this.props.form;
         return(
             <div className='loginIn'>
                 <TopHead address='/person' headInfo='淘票'></TopHead>
@@ -41,30 +45,27 @@ class loginIn extends Component{
                     <li>
                         <List>
                             <InputItem
-                                type="phone"
-                                placeholder="请输入你的手机号"
-                                error={this.state.hasError}
-                                onErrorClick={this.onErrorClick}
-                                onChange={this.onChange}
-                                value={this.state.value}
-                            >手机号码</InputItem>
+                                placeholder="请输入用户名"
+                                {...getFieldProps('username',{rules:[{
+                                    required:true
+                                }]})}
+                            >用户名</InputItem>
                         </List>
                     </li>
                     <li>
                         <List>
                             <InputItem
-                                type="pwd"
                                 placeholder="请输入密码"
-                                error={this.state.hasError}
-                                onErrorClick={this.onErrorClick}
-                                onChange={this.onChange}
-                                value={this.state.value}
+                                {...getFieldProps('password',{rules:[{
+                                    required:true
+                                }]})}
                             >密码</InputItem>
                         </List>
                     </li>
                     <li>
                         <Button 
                         type="primary"
+                        onClick={this.submitSignInInfo}
                         >登陆</Button>
                     </li>
                     <li>
@@ -77,4 +78,4 @@ class loginIn extends Component{
     }
 }
 
-export default loginIn
+export default createForm()(loginIn)

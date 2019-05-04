@@ -21,7 +21,7 @@ class City extends Component {
     
     //加载城市数据
     async loadCityData(){
-        const cityPinker = await axios.get('/api/cityPinker').then((res) => {
+        const cityPinker = await axios.get('/mock/cityPinker').then((res) => {
             return res.data
         })
         if(cityPinker.status===200){

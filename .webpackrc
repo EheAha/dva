@@ -6,6 +6,10 @@
     "/ajax": {
       "target": "http://m.maoyan.com",
       "changeOrigin": true
+    },
+    "/api": {
+      "target": "http://localhost:3000",
+      "changeOrigin": true
     }
   },
   "env": {

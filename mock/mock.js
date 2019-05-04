@@ -98,7 +98,7 @@ let data = Mock.mock({
 })
 
 module.exports = {
-    [`GET /api/hot`](req,res){
+    [`GET /mock/hot`](req,res){
         setTimeout(() => {
             res.json({
                 status:200,

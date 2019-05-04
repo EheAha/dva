@@ -95,7 +95,7 @@ class MoviePage extends Component {
                       Object.getOwnPropertyNames(selectCondition).length !== 0 && selectCondition.service.subItems.map((item) => {
                         return (
                           <div 
-                          className="item chosen"
+                          className="item"
                           data-type="service" 
                           key={item.id} 
                           onClick={
@@ -111,7 +111,7 @@ class MoviePage extends Component {
                       Object.getOwnPropertyNames(selectCondition).length !== 0 && selectCondition.hallType.subItems.map((item) => {
                         return (
                           <div 
-                          className="item chosen" 
+                          className="item" 
                           data-type="hallType" 
                           key={item.id}
                           onClick={
@@ -123,10 +123,10 @@ class MoviePage extends Component {
                     }
                   </div>
                 </div>
-                <div id="special-btn">
+                {/* <div id="special-btn">
                   <span className="btn" id="cancel-btn">重置</span>
                   <span className="btn" id="confirm-btn">确定</span>
-                </div>
+                </div> */}
               </div>
               <div className="page brand" style={{ "display": selectText === '.brand' ? 'block' : 'none' }}>
                 <div id="brand-content" style={{ 'height': '345px' }}>

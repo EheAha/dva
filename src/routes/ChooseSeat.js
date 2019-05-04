@@ -38,10 +38,10 @@ class ChooseSeat extends Component {
     };
 
     getRoomInfo() {
-        return axios.get('/api/roomInfo');
+        return axios.get('/mock/roomInfo');
     };
     getFilmInfo() {
-        return axios.get('/api/filmInfo');
+        return axios.get('/mock/filmInfo');
     };
 
     renderSeat() {

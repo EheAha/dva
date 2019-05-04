@@ -14,7 +14,7 @@ class HotPage extends Component{
     }
 
     componentDidMount(){
-        axios.get('/api/hot').then((res)=>{
+        axios.get('/api/position/fe/list').then((res)=>{
             console.log(res)
         })
     }

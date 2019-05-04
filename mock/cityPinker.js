@@ -4847,7 +4847,7 @@ let data = Mock.mock({
 })
 
 module.exports = {
-    [`GET /api/cityPinker`](req, res) {
+    [`GET /mock/cityPinker`](req, res) {
         setTimeout(() => {
             res.json({
                 status: 200,

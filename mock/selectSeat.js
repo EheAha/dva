@@ -29,7 +29,7 @@ const result = Mock.mock({
 })
 
 module.exports = {
-    [`Get /api/roomInfo`](req,res){
+    [`Get /mock/roomInfo`](req,res){
         setTimeout(()=>{
             res.json({
                 status:200,
@@ -37,7 +37,7 @@ module.exports = {
             })
         },200)
     },
-    [`Get /api/filmInfo`](req,res){
+    [`Get /mock/filmInfo`](req,res){
         setTimeout(()=>{
             res.json({
                 status:200,

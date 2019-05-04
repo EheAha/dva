@@ -5,6 +5,7 @@ function parseJSON(response) {
 }
 
 function checkStatus(response) {
+  console.log(response)
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
@@ -22,6 +23,7 @@ function checkStatus(response) {
  * @return {object}           An object containing either "data" or "err"
  */
 export default function request(url, options) {
+  console.log(url,options)
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON)
