@@ -39,7 +39,7 @@ class HotPage extends Component {
 
     render() {
         const { hotList } = this.state
-        console.log(this.state.hotList)
+        // console.log(this.state.hotList)
         return (
             <div className={styles.hotList_wrap}>
                 <div>
