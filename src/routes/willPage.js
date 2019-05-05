@@ -19,6 +19,14 @@ class WillPage extends Component {
     componentDidMount() {
         this.loadExpected();
         this.loadComing();
+        this.expectedList = new BScroll(this.expectedList,{
+            click:true,
+            probeType:1,
+            scrollX:true,
+            pullUpLoad:{
+                threshold:50
+            }
+        })
     }
 
     //加载受欢迎电影数据
@@ -63,7 +71,6 @@ class WillPage extends Component {
         this.comingList = new BScroll(this.cominglist,{
             click:true,
             probeType:1,
-            scrollX:true,
             pullUpLoad:{
                 threshold:30
             }
@@ -116,7 +123,7 @@ class WillPage extends Component {
                 <div>
                     <div className={styles.most_expected}>
                         <div className={styles.title}>近期最受期待</div>
-                        <div className={styles.most_expected_list}>
+                        <div className={styles.most_expected_list} ref={el => this.expectedList = el}>
                             <div className='top_wrap'>
                                 {
                                     expected.length !== 0 && expected.map((item, index) => {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Toast } from 'antd-mobile'
 import TopHead from 'components/head/header'
-import { withRouter } from 'dva/router'
+import { withRouter} from 'dva/router'
 import axios from 'axios'
 import 'css/details.less'
 
@@ -41,7 +41,8 @@ class Detail extends Component {
 
     goTicket() {
         //跳转到购票页
-        this.props.history.push('/chooseSeat');
+        let ids = this.props.location.search.split("=")[1];
+        this.props.history.push('/chooseSeat?id='+ids);
     }
 
     render() {

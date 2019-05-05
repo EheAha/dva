@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import {Toast} from 'antd-mobile';
 import axios from 'axios';
 import uuid from 'node-uuid';
 import _ from 'lodash';
@@ -9,7 +10,6 @@ import empty from 'images/empty.png';
 import occupy from 'images/occupy.png';
 import select from 'images/select.png';
 import screen from 'images/screen.png';
-import poster from 'images/1.jpg';
 
 class ChooseSeat extends Component {
     constructor(props) {
@@ -18,21 +18,35 @@ class ChooseSeat extends Component {
             row: 10,
             column: 10,
             roomInfo: [],
-            filmInfo: {},
+            filmInfo: [],
             seatCode: [],
-            selectSeat: []
+            selectSeat: [],
+            id: '',
+            ticketInfo:{}
         };
         this.sureChooseSeat = this.sureChooseSeat.bind(this);
     };
 
     componentWillMount() {
-        axios.all([this.getRoomInfo(), this.getFilmInfo()])
+        const id = this.props.location.search.split("=")[1];
+        this.setState({
+            id
+        })
+        axios.all([this.getRoomInfo(), this.getMovieDetail()])
             .then(axios.spread((roomInfo, filmInfo) => {
                 this.setState({
                     roomInfo: roomInfo.data.data.data,
-                    filmInfo: filmInfo.data.result.data,
+                    filmInfo: filmInfo.data.data.hot
                 }, () => {
                     this.code();
+                    this.state.filmInfo.map((item)=>{
+                        if(item.id===id){
+                            console.log(item);
+                            this.setState({
+                                ticketInfo:item
+                            })
+                        }
+                    })
                 });
             }));
     };
@@ -40,9 +54,10 @@ class ChooseSeat extends Component {
     getRoomInfo() {
         return axios.get('/mock/roomInfo');
     };
-    getFilmInfo() {
-        return axios.get('/mock/filmInfo');
-    };
+    
+    getMovieDetail() {
+        return axios.get('/mock/hotDetails');
+    }
 
     renderSeat() {
         let { roomInfo } = this.state;
@@ -52,12 +67,12 @@ class ChooseSeat extends Component {
         let columns = [];
         for (let i = 0, len = roomInfo.length; i < len; i++) {
             columns.push(<div key={uuid.v4()} className="row">
-                {roomInfo[i].map((val,index)=>{
-                    return <span 
-                            key={uuid.v4()} 
-                            onClick={e=>this.click(i,index)} 
-                            className={classnames('seat',{'empty':val===0,'occupy':val===1,'select':val===2})}
-                           ></span>
+                {roomInfo[i].map((val, index) => {
+                    return <span
+                        key={uuid.v4()}
+                        onClick={e => this.click(i, index)}
+                        className={classnames('seat', { 'empty': val === 0, 'occupy': val === 1, 'select': val === 2 })}
+                    ></span>
                 })}
             </div>);
         }
@@ -101,10 +116,10 @@ class ChooseSeat extends Component {
                     column: j,
                     // code: seatRow + "排" + (++seatColumn) + "座"
                 } : {
-                    row: i,
-                    column: j,
-                    code: seatRow + "排" + (j+1) + "座"
-                });
+                        row: i,
+                        column: j,
+                        code: seatRow + "排" + (j + 1) + "座"
+                    });
             }
             rowData.push(columnData);
         }
@@ -143,12 +158,43 @@ class ChooseSeat extends Component {
         });
     }
 
-    sureChooseSeat(){
-        this.props.history.push('/ticketing');
+    //点击确认选座时要判断是否已经登陆
+    async sureChooseSeat() {
+        if(this.state.selectSeat.length!==0){
+            await axios.get('/api/users/isSignin').then((res)=>{
+                console.log(res)
+                if(!res.data.ret){
+                    Toast.info('请登录后进行购票！');
+                    this.props.history.push('/loginIn');
+                    return;
+                }
+                const username = res.data.data.username;
+                //将座位以及存储进数据库
+                this.saveDatabase(username);
+                //电影票购买完毕，到订单中查看
+                this.props.history.push('/ticketing?id='+this.state.id);
+            })
+        }else{
+            Toast.info('您当前没有选择座位，请选择。');
+        }
+    }
+
+    //将座位以及存储进数据库
+    async saveDatabase(username){
+        await axios.post('/api/order/save',{
+            'username':username,
+            'data':{
+                'seat':this.state.selectSeat,
+                'other':this.state.ticketInfo
+            }
+        }).then((res)=>{
+            console.log(res.data)
+        })
     }
 
     render() {
-        let { filmInfo, selectSeat } = this.state;
+        let { filmInfo, selectSeat, id } = this.state;
+        console.log(selectSeat)
         return (
             <div className="container_wrap">
                 <div className="container">
@@ -182,37 +228,47 @@ class ChooseSeat extends Component {
                     </div>
                     <div className="msg-container">
                         <div>
-                            <div className="info-header">
-                                <div className="header-msg">
-                                    <h3>{filmInfo.name}</h3>
-                                    <p><span>类型：</span>{filmInfo.type}</p>
-                                    <p><span>时长：</span>{filmInfo.duration}</p>
-                                </div>
-                            </div>
-                            <div className="info-main">
-                                <p><span>影院：</span>{filmInfo.cinema}</p>
-                                <p><span>影厅：</span>{filmInfo.filmRoom}</p>
-                                <p><span>版本：</span>{filmInfo.version}</p>
-                                <p><span>场次：</span>{filmInfo.arrange}</p>
-                                <p><span>类型：</span>{filmInfo.type}</p>
-                                <p><span>票价：</span>{"￥"+Number(filmInfo.price).toFixed(2)+"/张"}</p>
-                            </div>
+                            {
+                                filmInfo.length !== 0 && filmInfo.map((item, index) => {
+                                    if (item.id === id) {
+                                        return (
+                                            <div key={index}>
+                                                <div className="info-header">
+                                                    <div className="header-msg">
+                                                        <h3>{item.nm}</h3>
+                                                        <p><span>类型：</span>{item.type}</p>
+                                                        <p><span>时长：</span>{item.duration}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="info-main">
+                                                    <p><span>影院：</span>{item.cinema}</p>
+                                                    <p><span>影厅：</span>{item.filmRoom}</p>
+                                                    <p><span>版本：</span>{item.version}</p>
+                                                    <p><span>场次：</span>{item.arrange}</p>
+                                                    <p><span>类型：</span>{item.type}</p>
+                                                    <p><span>票价：</span>{"￥" + Number(item.price).toFixed(2) + "/张"}</p>
+                                                </div>
+                                                <div className="select-item">
+                                                    <span className="select-label">座位：</span>
+                                                    <div className="select-seat">
+                                                        {
+                                                            selectSeat.length > 0 ? (selectSeat.map(val => {
+                                                                return <span key={uuid.v4()} className="ticket">{val.code}</span>
+                                                            })) : <span>一次最多选择五张电影票</span>
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div className="select-item">
+                                                    <span className="select-label">总价：</span>
+                                                    <span>{(selectSeat.length * item.price).toFixed(2)}元</span>
+                                                </div>
+                                                <button className="btn" onClick={this.sureChooseSeat}>确认选座</button>
+                                            </div>
+                                        )
+                                    }
+                                })
+                            }
                             <div>
-                            <div className="select-item">
-                                <span className="select-label">座位：</span>
-                                <div className="select-seat">
-                                {
-                                    selectSeat.length>0?(selectSeat.map(val=>{
-                                        return <span key={uuid.v4()} className="ticket">{val.code}</span>
-                                    })):<span>一次最多选择五张电影票</span>
-                                }
-                                </div>
-                            </div>
-                                <div className="select-item">
-                                    <span className="select-label">总价：</span>
-                                    <span>{(selectSeat.length*filmInfo.price).toFixed(2)}元</span>
-                                </div>
-                                <button className="btn" onClick={this.sureChooseSeat}>确认选座</button>
                             </div>
                         </div>
                     </div>

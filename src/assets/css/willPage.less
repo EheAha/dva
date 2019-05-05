@@ -198,22 +198,24 @@
         }
     }
 }
+// .move(@left){
+//     @name:~`'activeLeft'`;
+//     @keyframes @name {
+//         0%{
+//             left:0;
+//         }
+//         50%{
+//             left:@left;
+//         }
+//         100%{
+//             left:0;
+//         }
+//     }
+//     animation: @name linear 8s infinite;
+// }
 
 :global{
     .top_wrap{
-        width:600px;
-        position: relative;
-        left:0;
-        animation-name: activeLeft;
-    }
-}
-:global{
-    @keyframes activeLeft{
-        0%{
-            left:0;
-        }
-        100%{
-            left:-598px;
-        }
+        width:1000px;
     }
 }
