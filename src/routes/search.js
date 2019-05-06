@@ -13,13 +13,14 @@ class Search extends Component {
             isShowTag: 'block',
             isShowSearchList: 0,
             searchList: [],
-            searchRecord: JSON.parse(localStorage.getItem('searchRecord'))
+            searchRecord: JSON.parse(localStorage.getItem('searchRecord')),
+            cityId:''
         }
         this.submitText = this.submitText.bind(this);
     }
 
     componentDidMount() {
-        // this.autoFocusInst.focus();
+        this.setState({cityId:localStorage.getItem('cityId')});
         console.log(this.state.searchRecord)
         if(localStorage.getItem('searchRecord')===null){
             this.searchRecord={};
@@ -30,7 +31,7 @@ class Search extends Component {
 
     //点击enter键进行搜索
     async submitText(value) {
-        const searchList = await axios.get('/ajax/search?kw=' + value + '&cityId=10&stype=2').then((res) => { return res.data })
+        const searchList = await axios.get('/ajax/search?kw=' + value + '&cityId='+this.state.cityId+'&stype=2').then((res) => { return res.data })
         this.searchRecord[value]=0;
         if (searchList !== undefined) {
             this.setState({

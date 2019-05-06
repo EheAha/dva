@@ -3,6 +3,8 @@ import { Toast } from 'antd-mobile'
 import TopHead from 'components/head/header'
 import 'css/ChooseSeat.less'
 import axios from 'axios'
+import img1 from 'images/timg.gif'
+
 class Order extends Component {
     state = {
         ordersInfo: []
@@ -41,36 +43,52 @@ class Order extends Component {
         return (
             <div style={{ "position": "relative", "zIndex": '99', "background": "#fff" }}>
                 <TopHead address='/homePage' headInfo='我的订单'></TopHead>
-                <div className="msg-container" style={{ "height": "6.67rem", "overflow": "scroll", "paddingBottom": ".49rem" }}>
-                    <div>
-                        {
-                            ordersInfo.length !== 0 && ordersInfo.map((item, index) => {
-                                // console.log(item.data.seat[0].code)
-                                return (
-                                    <div style={{ "marginBottom": "10px" }}>
-                                        <div className="info-header">
-                                            <div className="header-msg">
-                                                <h3>{item.data.other.nm}</h3>
-                                                <p><span>类型：</span>{item.data.other.type}</p>
-                                                <p><span>时长：</span>{item.data.other.duration}</p>
+                {
+                    ordersInfo.length !== 0 &&
+                    <div className="msg-container" style={{ "height": "6.67rem", "overflow": "scroll", "paddingBottom": ".49rem" }}>
+                        <div>
+                            {
+                                ordersInfo.length !== 0 && ordersInfo.map((item, index) => {
+                                    // console.log(item.data.seat[0].code)
+                                    return (
+                                        <div style={{ "marginBottom": "10px" }}>
+                                            <div className="info-header">
+                                                <div className="header-msg">
+                                                    <h3>{item.data.other.nm}</h3>
+                                                    <p><span>类型：</span>{item.data.other.type}</p>
+                                                    <p><span>时长：</span>{item.data.other.duration}</p>
+                                                </div>
+                                            </div>
+                                            <div className="info-main">
+                                                <p><span>影院：</span>{item.data.other.cinema}</p>
+                                                <p><span>影厅：</span>{item.data.other.filmRoom}</p>
+                                                <p><span>版本：</span>{item.data.other.version}</p>
+                                                <p><span>场次：</span>{item.data.other.arrange}</p>
+                                                <p><span>票价：</span>{"￥" + item.data.other.price + "/张"}</p>
+                                                <p key={index}><span>座位：</span>
+                                                    {
+                                                        item.data.seat.map((it, i) => {
+                                                            return <span key={i} style={{ "paddingRight": "5px" }}>{it.code}</span>
+                                                        })
+                                                    }
+                                                </p>
                                             </div>
                                         </div>
-                                        <div className="info-main">
-                                            <p><span>影院：</span>{item.data.other.cinema}</p>
-                                            <p><span>影厅：</span>{item.data.other.filmRoom}</p>
-                                            <p><span>版本：</span>{item.data.other.version}</p>
-                                            <p><span>场次：</span>{item.data.other.arrange}</p>
-                                            <p><span>票价：</span>{"￥" + item.data.other.price + "/张"}</p>
-                                            <p><span>座位：</span>{item.data.seat[0].code}</p>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
-                </div>
+                }
                 {
-                    ordersInfo.length === 0 && <div style={{ "width": "100%", "textAlign": "center", "lineHeight": '28px' }}>您好，当前没有订单信息哦，请购买后查看！</div>
+                    ordersInfo.length === 0 && <div>
+                        <div className='gif'>
+                            <img style={{"width":"100%","height":"100%"}} src={img1} alt=''/>
+                        </div>
+                        <div className='gifText' onClick={()=>{
+                            this.props.history.push('/homePage');
+                        }}>您好，当前没有订单信息哦，请购买后查看！点我去看热映电影呦。</div>
+                    </div>
                 }
             </div>
         )

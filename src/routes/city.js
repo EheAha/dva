@@ -9,13 +9,21 @@ class City extends Component {
         super();
         this.state = {
            hotCity:[],
-           allCities:{}
+           allCities:{},
+           cityName:'北京',
+           cityId:1
         }
         this.pickIt = this.pickIt.bind(this);
         this.cityBack = this.cityBack.bind(this);
     }
 
     componentDidMount() {
+        const cityName = localStorage.getItem('cityName');
+        if(cityName!==null){
+            this.setState({
+                cityName
+            })
+        }
         this.loadCityData();
     }
     
@@ -32,8 +40,17 @@ class City extends Component {
         }
     }
 
-    pickIt(name){
-        console.log(name);
+    async pickIt(name,id){
+        console.log(name,id);
+        this.setState({
+            cityName:name,
+            cityId:id
+        },()=>{
+            localStorage.setItem('cityName',this.state.cityName);
+            localStorage.setItem('cityId',this.state.cityId);
+            this.props.history.push('/movie');
+        })
+        // await axios.get('/ajax/filterCinemas',{params:{ci:id}}).then(res=>{console.log(res)});
     }
 
     cityBack(){
@@ -60,7 +77,7 @@ class City extends Component {
                                 {
                                     hotCity.length!==0?hotCity.map((item,index)=>{
                                         return (
-                                            <div className="city-item" onClick={()=>{this.pickIt(item.name)}} key={item.id}>{item.name}</div>
+                                            <div className="city-item" onClick={()=>{this.pickIt(item.name,item.id)}} key={item.id}>{item.name}</div>
                                         )
                                     }) : ''
                                 }
@@ -76,7 +93,7 @@ class City extends Component {
                                                 {
                                                     allCities[item].map((itemValues,i)=>{
                                                             return(
-                                                                <div className="city-item-hang" onClick={()=>{this.pickIt(itemValues.name)}} key={i}>{itemValues.name}</div>
+                                                                <div className="city-item-hang" onClick={()=>{this.pickIt(itemValues.name,itemValues.id)}} key={i}>{itemValues.name}</div>
                                                             )         
                                                     })
                                                 }

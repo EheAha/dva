@@ -9,15 +9,31 @@ class MoviePage extends Component {
     this.state = {
       selectText: '',
       selectCondition: {},
-      cinameList: {}
+      cinameList: {},
+      cityName:'',
+      cityId:''
     }
     this.select = this.select.bind(this);
-    // this.handleArea = this.handleArea.bind(this);
-    // this.handleBrand = this.handleBrand.bind(this);
-    // this.handleServer = this.handleServer.bind(this);
-    // this.handleSpacial = this.handleSpacial.bind(this);
   }
 
+  componentDidMount() {
+    this.getCityInfo();
+  }
+
+  //获取存储的城市和城市id
+  getCityInfo(){
+    const cityName = localStorage.getItem('cityName');
+    const cityId = localStorage.getItem('cityId');
+    this.setState({
+      cityName:cityName,
+      cityId:cityId
+    },()=>{
+      this.getCinameList();
+      this.getSelectCondition();
+    })
+  }
+
+  //获取筛选条件的id，并请求影院列表
   async handleArea(id,e){
     const dataType = e.target.getAttribute('data-type');
     switch(dataType){
@@ -31,20 +47,16 @@ class MoviePage extends Component {
                       break;
       default:
     }
-    const chooseCinameList = await axios.get('/ajax/cinemaList?'+this.requestIdName+'='+id).then(res=>{return res.data});
+    const chooseCinameList = await axios.get('/ajax/cinemaList?'+this.requestIdName+'='+id+'&cityId='+this.state.cityId).then(res=>{return res.data});
     this.setState({
       cinameList: chooseCinameList,
       selectText:''
     })
   }
 
-  componentDidMount() {
-    this.getCinameList();
-    this.getSelectCondition();
-  }
-
   async getSelectCondition() {
-    const selectCondition = await axios.get('/ajax/filterCinemas').then((res) => { return res.data });
+    console.log(this.state.cityId)
+    const selectCondition = await axios.get('/ajax/filterCinemas?ci='+this.state.cityId).then((res) => { return res.data });
     if (selectCondition !== undefined) {
       this.setState({
         selectCondition: selectCondition
@@ -53,7 +65,7 @@ class MoviePage extends Component {
   }
 
   async getCinameList() {
-    const cinameList = await axios.get('/ajax/cinemaList').then((res) => { return res.data })
+    const cinameList = await axios.get('/ajax/cinemaList?cityId='+this.state.cityId).then((res) => { return res.data })
     this.setState({
       cinameList: cinameList
     })

@@ -14,7 +14,7 @@ class ShareHead extends Component{
         return(
             <ul className='headerHome'>
                 <li>
-                    <span onClick={this.jumpCity.bind(this)}>安阳</span>
+                    <span onClick={this.jumpCity.bind(this)}>{localStorage.getItem('cityName')}</span>
                     <span className="iconfont icon--xialajiantou"></span>
                 </li>
                 <li>

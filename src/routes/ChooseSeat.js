@@ -162,7 +162,7 @@ class ChooseSeat extends Component {
     async sureChooseSeat() {
         if(this.state.selectSeat.length!==0){
             await axios.get('/api/users/isSignin').then((res)=>{
-                console.log(res)
+                // console.log(res)
                 if(!res.data.ret){
                     Toast.info('请登录后进行购票！');
                     this.props.history.push('/loginIn');
@@ -172,7 +172,9 @@ class ChooseSeat extends Component {
                 //将座位以及存储进数据库
                 this.saveDatabase(username);
                 //电影票购买完毕，到订单中查看
-                this.props.history.push('/ticketing?id='+this.state.id);
+                Toast.info('已选定座位，即将跳转到订单详情页');
+                this.props.history.push('/order');
+                // this.props.history.push('/ticketing?id='+this.state.id);
             })
         }else{
             Toast.info('您当前没有选择座位，请选择。');
