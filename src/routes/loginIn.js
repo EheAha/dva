@@ -66,7 +66,7 @@ class loginIn extends Component{
                         <Button 
                         type="primary"
                         onClick={this.submitSignInInfo}
-                        >登陆</Button>
+                        >登录</Button>
                     </li>
                     <li>
                         <a href='##'>遇到问题？</a>

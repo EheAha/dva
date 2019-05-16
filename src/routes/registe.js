@@ -108,7 +108,7 @@ class registe extends Component{
                         <a href='##'>新手指导？</a>
                         <a href='##' onClick={()=>{
                             this.props.history.push('/loginIn')
-                        }}>去登陆？</a>
+                        }}>去登录？</a>
                     </li>
                 </ul> 
             </div>

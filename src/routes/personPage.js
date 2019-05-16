@@ -20,7 +20,7 @@ class PersonPage extends Component {
         this.isSignIn();
     }
 
-    //判断是否已登陆
+    //判断是否已登录
     async isSignIn() {
         await axios.get('/api/users/isSignin').then((res) => {
             if (!res.data.ret) {
@@ -37,7 +37,7 @@ class PersonPage extends Component {
     }
 
     clickLogin() {
-        const BUTTONS = ['注册账号', '点击登陆', '取消'];
+        const BUTTONS = ['注册账号', '点击登录', '取消'];
         ActionSheet.showActionSheetWithOptions({
             options: BUTTONS,
             cancelButtonIndex: BUTTONS.length - 1,
@@ -51,7 +51,7 @@ class PersonPage extends Component {
                 }, () => {
                     const { clicked } = this.state;
                     clicked === '注册账号' && this.props.history.push('/registe');
-                    clicked === '点击登陆' && this.props.history.push('/loginIn');
+                    clicked === '点击登录' && this.props.history.push('/loginIn');
                     clicked === '取消' && this.props.history.push('/person');
                 });
             });
@@ -82,11 +82,11 @@ class PersonPage extends Component {
                         showUsername !== '' ? 
                         <div 
                         onClick={() =>
-                            alert('退出登陆', '你确定要退出登陆吗?', [
+                            alert('退出登录', '你确定要退出登录吗?', [
                                 { text: '取消', onPress: ()=>{this.cancelSiginOut()} },
                                 { text: '确定', onPress: () => {this.sureSiginOut()} },
                             ])
-                        }>{showUsername}</div> : <div onClick={this.clickLogin}>登陆</div>
+                        }>{showUsername}</div> : <div onClick={this.clickLogin}>登录</div>
                     }
                     <p>找到更适合你的电影哟~</p>
                 </div>
